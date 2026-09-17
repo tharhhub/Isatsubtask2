@@ -1,0 +1,98 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+string decimalToBinary(int n)
+{
+    string b = "";
+    do {
+        b = char('0' + n % 2) + b;
+        n /= 2;
+    } while (n > 0);
+    return b;
+}
+
+int binaryToDecimal(string b)
+{
+    int n = 0;
+    for (char c : b)
+        n = n * 2 + (c - '0');
+    return n;
+}
+
+string decimalToHex(int n)
+{
+    string h = "", d = "0123456789ABCDEF";
+    do {
+        h = d[n % 16] + h;
+        n /= 16;
+    } while (n > 0);
+    return h;
+}
+
+int hexToDecimal(string h)
+{
+    int n = 0;
+    for (char c : h) {
+        c = toupper(c);
+        if (c <= '9')
+            n = n * 16 + c - '0';
+        else
+            n = n * 16 + c - 'A' + 10;
+    }
+    return n;
+}
+
+int main()
+{
+    int choice, n;
+    string s;
+
+    do {
+        cout << "\nConversion Menu\n";
+        cout << "1. Decimal to Binary\n";
+        cout << "2. Binary to Decimal\n";
+        cout << "3. Hexadecimal to Decimal\n";
+        cout << "4. Decimal to Hexadecimal\n";
+        cout << "5. Demo\n";
+        cout << "6. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            cout << "Enter decimal: ";
+            cin >> n;
+            cout << "Binary: " << decimalToBinary(n) << endl;
+        }
+        else if (choice == 2) {
+            cout << "Enter binary: ";
+            cin >> s;
+            cout << "Decimal: " << binaryToDecimal(s) << endl;
+        }
+        else if (choice == 3) {
+            cout << "Enter hexadecimal: ";
+            cin >> s;
+            cout << "Decimal: " << hexToDecimal(s) << endl;
+        }
+        else if (choice == 4) {
+            cout << "Enter decimal: ";
+            cin >> n;
+            cout << "Hexadecimal: " << decimalToHex(n) << endl;
+        }
+        else if (choice == 5) {
+            n = rand() % 100;
+            cout << "Random number: " << n << endl;
+            cout << "Binary: " << decimalToBinary(n) << endl;
+        }
+        else if (choice == 6) {
+            cout << "Exiting program." << endl;
+        }
+        else {
+            cout << "Invalid choice." << endl;
+        }
+
+    } while (choice != 6);
+
+    return 0;
+}
